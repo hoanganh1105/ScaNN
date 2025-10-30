@@ -97,9 +97,9 @@ Video trình bày ý tưởng, cách chạy chương trình và kết quả:
 ## 👨‍💻 Thành viên thực hiện
 | Họ tên | Vai trò |
 |--------|----------|
-| **Huỳnh Hoàng Anh** | Nhóm trưởng – hiện thực ScaNN & đánh giá hiệu năng |
-| **Ngô Trung Tín** | Phụ trách xử lý dữ liệu và trực quan hóa kết quả |
-| **Huỳnh Tấn Tiến** | Phụ trách báo cáo, so sánh hiệu năng và video demo |
+| **Huỳnh Hoàng Anh** | Nhóm trưởng – Trình bày kết quả |
+| **Ngô Trung Tín** | Hiện thực ScaNN |
+| **Huỳnh Tấn Tiến** | Phụ trách báo cáo |
 
 ---
 
