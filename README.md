@@ -1,116 +1,171 @@
-# 🔍 ScaNN – Tăng tốc tìm kiếm gần đúng (Approximate Nearest Neighbors)
+# ScaNN vs Brute-Force Approximate Nearest Neighbor Search
 
-## 🧠 Giới thiệu
-Đề tài hiện thực và đánh giá thuật toán **ScaNN (Scalable Nearest Neighbors)** – giải pháp tìm kiếm vector gần đúng hiệu quả và có khả năng mở rộng, được phát triển bởi **Google Research**.  
-ScaNN được ứng dụng trong Google Search, TensorFlow và các hệ thống gợi ý (recommendation systems) quy mô lớn.
-
-Dự án này giúp sinh viên tiếp cận với các kỹ thuật hiện đại cho bài toán truy xuất vector hiệu suất cao.
+### Advanced Data Structures and Algorithms – Talent Program  
+Ho Chi Minh City University of Technology (HCMUT)
 
 ---
 
-## 🎯 Mục tiêu
-- Nghiên cứu kiến trúc và nguyên lý hoạt động của ScaNN:  
-  **Partitioning → Scoring → Reordering**
-- So sánh hiệu năng giữa ScaNN và phương pháp **brute-force**.
-- Đánh giá:
-  - Thời gian truy vấn trung bình
-  - Độ chính xác (recall@K)
-  - Dung lượng bộ nhớ và khả năng mở rộng
+## 📘 Overview
+This project implements and evaluates **ScaNN (Scalable Nearest Neighbors)** — a high-performance approximate nearest neighbor (ANN) search algorithm developed by **Google Research**.  
+ScaNN combines **partitioning**, **vector quantization**, and **asymmetric hashing** to achieve efficient large-scale vector retrieval.  
+We compare the performance of ScaNN against a baseline **brute-force** search to explore trade-offs between **accuracy**, **speed**, and **memory efficiency**.
 
 ---
 
-## ⚙️ Công nghệ sử dụng
-- **Ngôn ngữ:** Python  
-- **Thư viện chính:**
-  - [`scann`](https://github.com/google-research/google-research/tree/master/scann)
-  - `numpy`
-  - `matplotlib`
-  - `scikit-learn`
-  - `sentence-transformers` *(dùng để tạo vector từ văn bản)*
+## 🎯 Objectives
+- Study and understand the architecture of **ScaNN** (partitioning → scoring → reordering).  
+- Build an **ANN search system** using ScaNN in Python.  
+- Implement a **brute-force search** as a performance baseline.  
+- Conduct experiments to compare query latency, recall@K, and memory usage.  
+- Visualize performance metrics through clear and reproducible plots.
 
 ---
 
-## ▶️ Chạy thử trực tiếp trên Google Colab
-Bạn có thể mở và chạy project này trực tiếp tại đây:
-
-👉 **[Mở trong Google Colab](https://colab.research.google.com/drive/1Acu0lcUkqRo1vTJ8JKcC8mFNkFFYBjFP)**
+## 🧠 Theoretical Background
+ScaNN accelerates nearest neighbor search by reducing the number of distance computations required.  
+Its three main components are:
+1. **Partitioning** – clusters the dataset into smaller regions.  
+2. **Scoring** – selects the most relevant partitions based on approximate distances.  
+3. **Reordering** – re-ranks the candidates using exact distances for higher accuracy.  
+Compared with other ANN methods like **Faiss**, **HNSW**, and **Annoy**, ScaNN achieves a strong balance between **speed** and **recall** for large vector databases.
 
 ---
 
-## 💻 Cài đặt thủ công (tuỳ chọn)
-Nếu bạn muốn chạy trên máy cá nhân:
-
-```bash
-# Clone repository
-git clone https://github.com/hoanganh1105/ScaNN.git
-cd ScaNN
-
-# Cài đặt các thư viện cần thiết
-pip install scann numpy matplotlib scikit-learn sentence-transformers
+## 🧩 Project Structure
 ```
-
----
-
-## 🚀 Cách chạy
-Chạy notebook chính:
-```bash
-jupyter notebook ScaNN.ipynb
-```
-
-Hoặc mở file `.ipynb` trong Google Colab và chạy từng cell.
-
----
-
-## 📊 Kết quả đánh giá
-Project cung cấp:
-- **So sánh tốc độ** giữa ScaNN và brute-force.
-- **Độ chính xác (recall@K)** của ScaNN.
-- **Biểu đồ trực quan** về thời gian truy vấn, độ chính xác, và tốc độ.
-
-Ví dụ minh họa:
-```
-K = 10
-ScaNN Recall@K: 0.94
-ScaNN Time (ms): 5.3
-Brute-force Time (ms): 48.7
-```
-
----
-
-## 📁 Cấu trúc thư mục
-```
-ScaNN/
+scann-ann/
+├── data/
+│   ├── vectors.npy            # generated or preprocessed dataset
+│   └── queries.npy            # sample query vectors
 │
-├── ScaNN.ipynb           # Notebook chính (Google Colab)
-├── README.md             # Tài liệu hướng dẫn (bạn đang đọc)
-└── data/ (tùy chọn)      # Dữ liệu vector nếu có
+├── src/
+│   ├── brute_force.py         # baseline linear search implementation
+│   ├── scann_search.py        # ScaNN-based ANN search
+│   ├── evaluate.py            # accuracy, timing, memory evaluation
+│   ├── visualize.py           # performance plots
+│   └── utils.py               # helper functions
+│
+├── notebooks/
+│   └── demo.ipynb             # interactive demonstration and analysis
+│
+├── results/
+│   ├── timing_plot.png
+│   ├── recall_plot.png
+│   └── memory_comparison.png
+│
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
-## 📹 Video minh họa
-Video trình bày ý tưởng, cách chạy chương trình và kết quả:
-> (Thêm link YouTube hoặc Google Drive tại đây khi có)
+## ⚙️ Installation
+### 1. Clone the repository
+```bash
+git clone https://github.com/<your-username>/scann-ann.git
+cd scann-ann
+```
+### 2. Install dependencies
+```bash
+pip install -r requirements.txt
+```
+**Required libraries:**
+```
+scann
+numpy
+scikit-learn
+sentence-transformers
+matplotlib
+```
 
 ---
 
-## 👨‍💻 Thành viên thực hiện
-| Họ tên | Vai trò |
-|--------|----------|
-| **Huỳnh Hoàng Anh** | Nhóm trưởng – Trình bày kết quả |
-| **Ngô Trung Tín** | Hiện thực ScaNN |
-| **Huỳnh Tấn Tiến** | Phụ trách báo cáo |
+## 🚀 Usage
+### Run the experiments locally
+```bash
+python src/scann_search.py
+```
+or open the Jupyter notebook:
+```bash
+notebooks/demo.ipynb
+```
+
+### Example workflow
+1. Generate or load vector datasets (e.g., from images or text embeddings).  
+2. Build and query the ScaNN index.  
+3. Run brute-force search for baseline comparison.  
+4. Evaluate average query time and recall@K.  
+5. Visualize the performance metrics.
 
 ---
 
-## 📚 Tài liệu tham khảo
-- Google Research: [ScaNN: Efficient Vector Similarity Search](https://github.com/google-research/google-research/tree/master/scann)  
-- Paper: *ScaNN: Efficient Vector Similarity Search at Scale* (Google AI Blog)  
-- TensorFlow Similarity Documentation  
+## 📊 Expected Outputs
+- **ScaNN** achieves significant speedup over brute-force with high recall.  
+- Comparative plots:
+  - Query time vs. K
+  - Recall@K
+  - Memory usage  
+Example output:
+```
+Average query time:
+  - Brute-force: 0.285 s
+  - ScaNN:       0.012 s
+Recall@10: 0.97
+```
 
 ---
 
-## 🏁 Giấy phép
-Project chỉ sử dụng cho **mục đích học tập và nghiên cứu** trong học phần *Cấu trúc dữ liệu và Giải thuật – KSTN*.
+## 🧪 Experimental Setup
+- **Dataset:** Random vectors or embeddings extracted via ResNet/SBERT  
+- **Dimensions:** 128–768  
+- **Queries:** 100 random vectors  
+- **Evaluation metrics:**
+  - Average query latency  
+  - Recall@K (K = 5, 10, 20)  
+  - Memory usage  
+- **Hardware:** CPU-based testing (optionally GPU for embedding generation)
 
 ---
+
+## 📈 Visualization
+Performance results are plotted using `matplotlib`, including:
+- Query time comparison between ScaNN and brute-force  
+- Recall@K curves  
+- Memory utilization histogram  
+
+Example snippet:
+```python
+plt.plot(k_values, query_times_scann, label='ScaNN')
+plt.plot(k_values, query_times_bruteforce, label='Brute-force')
+plt.xlabel('K')
+plt.ylabel('Average Query Time (s)')
+plt.legend()
+plt.show()
+```
+
+---
+
+## 🧰 Tools and Environment
+- **Language:** Python 3.10+  
+- **Libraries:** ScaNN, NumPy, Matplotlib, Scikit-learn, Sentence-Transformers  
+- **Supported Platforms:** Google Colab, Jupyter Notebook, or local Python environment
+
+---
+
+## 👥 Authors
+- **Huỳnh Hoàng Anh**   
+- **Ngô Trung Tín**   
+- **Huỳnh Tấn Tiến**  
+
+---
+
+## 📜 License
+This project is for **academic and educational purposes only**.  
+© 2025, Ho Chi Minh City University of Technology – Faculty of Computer Science and Engineering.
+
+---
+
+## 🔗 Links
+- 📘 [ScaNN Official Repository](https://github.com/google-research/google-research/tree/master/scann)  
+- 📄 [Project Report (PDF)](report/report.pdf)  
+- ▶️ [Google Colab Demo](https://colab.research.google.com/drive/your-demo-link)
